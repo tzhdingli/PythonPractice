@@ -73,12 +73,14 @@ def create_fig(select_dropdown):
 def create_scatter(site, payload):
     print(payload)
     if site == 'ALL':
-        filter_df = spacex_df[spacex_df['Payload Mass (kg)']>=payload[0] & spacex_df['Payload Mass (kg)']<=payload[1]]
+        filter_df = spacex_df[(spacex_df['Payload Mass (kg)']>=int(payload[0])) & (spacex_df['Payload Mass (kg)']<=int(payload[1]))]
+        print(filter_df[['class','Payload Mass (kg)']])
         fig=px.scatter(filter_df,x='Payload Mass (kg)', y='class',color="Booster Version Category")
 
     else:
         filter_df = spacex_df[spacex_df['Launch Site']==select_dropdown]
-        filter_df = filter_df[filter_df['Payload Mass (kg)']>=payload[0] & filter_df['Payload Mass (kg)'] <=payload[1]]
+        filter_df = filter_df[(filter_df['Payload Mass (kg)']>=int(payload[0])) & (filter_df['Payload Mass (kg)'] <=int(payload[1]))]
+        print(filter_df[['class','Payload Mass (kg)']])
         fig=px.scatter(filter_df,x='Payload Mass (kg)', y='class',color="Booster Version Category")
     return fig
 
